@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\RoomModel;
 
 class TypeModel extends Model
 {
@@ -13,11 +14,18 @@ class TypeModel extends Model
     protected $fillable = [
         'name',
         'description',
+        'price_per_night',
     ];
 
     public function rooms()
     {
-        return $this->hasMany(RoomModel::class);
+        return $this->hasMany(RoomModel::class, 'type_id');
+    }
+
+    public function reviews()
+    {
+        
+        return $this->hasMany(RatingModel::class, 'type_id');
     }
 
     public function images()

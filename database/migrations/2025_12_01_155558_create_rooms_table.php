@@ -14,11 +14,8 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('room_number')->unique();
-            $table->decimal('price_per_night', 10, 2);
             $table->boolean('is_booked')->default(false);
-            $table->text('description')->nullable();
             $table->integer('capacity');
-
             $table->unsignedBigInteger('type_id');
             $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
 

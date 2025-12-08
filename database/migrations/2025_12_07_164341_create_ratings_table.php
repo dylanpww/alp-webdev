@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('types', function (Blueprint $table) {
+        Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->text('description')->nullable();
-            $table->decimal('price_per_night', 10, 2);
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('type_id')->nullable();
+            $table->integer(column: 'rating');
+            $table->text(column: 'comment')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('types');
+        Schema::dropIfExists('ratings');
     }
 };

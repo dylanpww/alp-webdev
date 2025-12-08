@@ -13,17 +13,21 @@ return new class extends Migration
 
             $table->date('check_in_date');
             $table->date('check_out_date');
-            $table->decimal('total_price', 10, 2)->nullable();
+            $table->integer('total_price');
             $table->string('status')->default('pending');
-            $table->string('type'); 
+            $table->string('type');
 
-            $table->foreignId('user_id')
-                ->constrained()
-                ->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
 
             $table->foreignId('room_id')
-                ->constrained()
-                ->onDelete('cascade');
+                ->nullable()
+                ->constrained('rooms')
+                ->cascadeOnDelete();
+
+            $table->foreignId('rent_motorcycle_id')
+                ->nullable()
+                ->constrained('rent_motorcycles')
+                ->cascadeOnDelete();
 
             $table->timestamps();
         });

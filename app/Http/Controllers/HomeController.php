@@ -1,14 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\FacilityModel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-use Illuminate\Http\Request;
+
 
 class HomeController extends Controller
 {
 
     public function index()
     {
+
+        $user = Auth::user();
+        $username = $user ? $user->name : 'Guest';
+
         $path = storage_path('app/public/preview');
 
         $images = collect(File::files($path))
@@ -16,6 +23,9 @@ class HomeController extends Controller
                 return 'storage/preview/' . $file->getFilename();
             });
 
-        return view('home', compact('images'));
-    }
+            $facilities = FacilityModel::with("images")->get();
+
+
+        return view('home', compact('images', 'facilities', 'username'));}
+
 }

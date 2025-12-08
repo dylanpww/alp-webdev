@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark shadow-sm " style="background:  #f3f3ea">
     <div class="container py-1">
         <a class="navbar-brand fw-bold text-black fs-4" href="/">
-            <img src="logo_sarang.png" alt="Logo" class="img-fluid" style="height: 70px; width: auto;">
+            <img src="{{ asset('logo_sarang.png') }}" alt="Sarang Logo" class="img-fluid" style="height: 70px; width: auto;">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -17,14 +17,14 @@
                 </li>
                 <li class="nav-item mx-2 ">
                     <a class="nav-link {{ Request::is('book-now') ? 'active' : '' }}" href="/book-now">
-                        Book Now
+                        Book Room
                     </a>
                 </li>
-                {{-- <li class="nav-item mx-2">
-                    <a class="nav-link {{ Request::is('aboutUs') ? 'active' : '' }}" href="/aboutUs">
-                        About Us
+                <li class="nav-item mx-2">
+                    <a class="nav-link {{ Request::is('rent-motorcycle') ? 'active' : '' }}" href="/rent-motorcycle">
+                        Rent a Motorcycle!
                     </a>
-                </li> --}}
+                </li>
                 {{-- <li class="nav-item mx-2">
                     <a class="nav-link {{ Request::is('cart') ? 'active' : '' }}" href="/cart">
                         View Cart

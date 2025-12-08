@@ -24,12 +24,14 @@ class TypeController extends Controller
         $request->validate([
             'name' => 'required|unique:types,name',
             'description' => 'nullable',
+            'price_per_night' => 'required|numeric',
             'images.*' => 'image|max:10000'
         ]);
 
         $type = TypeModel::create([
             'name' => $request->name,
             'description' => $request->description,
+            'price_per_night' => $request->price_per_night,
         ]);
 
         if ($request->hasFile('images')) {
@@ -45,6 +47,26 @@ class TypeController extends Controller
             }
         }
 
-        return redirect()->route('types.index')->with('success', 'Type created successfully!');
+        return redirect()->route('types.index');
+    }
+
+    public function show($id)
+    {
+        $type = TypeModel::with(['reviews.user', 'images'])->findOrFail($id);
+        $averageRating = $type->reviews->avg('rating') ?? 0;
+
+        $roomData = (object) [
+            'id' => $type->id,
+            'type_name' => $type->name,
+            'price' => $type->price_per_night,
+            'image' => $type->images->first() ? $type->images->first()->url : 'default.jpg',
+            'description' => $type->description,
+            'average_rating' => $averageRating,
+            'reviews' => $type->reviews 
+        ];
+
+        return view('room-details', [
+            'room' => $roomData
+        ]);
     }
 }

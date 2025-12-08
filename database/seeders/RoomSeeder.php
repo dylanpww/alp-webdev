@@ -13,76 +13,32 @@ class RoomSeeder extends Seeder
      */
     public function run(): void
     {
-        RoomModel::create([
-            'room_number' => '101',
-            'price_per_night' => 750000,
-            'is_booked' => false,
-            'description' => 'Kamar Deluxe dengan pemandangan laut yang indah.',
-            'capacity' => 2,
-            'type_id' => 1,
-        ]);
 
-        RoomModel::create([
-            'room_number' => '102',
-            'price_per_night' => 750000,
-            'is_booked' => false,
-            'description' => 'Kamar Deluxe dengan pemandangan laut.',
-            'capacity' => 2,
-            'type_id' => 1,
-        ]);
+        for ($i = 101; $i <= 108; $i++) {
+            RoomModel::create([
+                'room_number' => (string) $i,
+                'is_booked' => false,
+                'capacity' => 2,
+                'type_id' => 1, 
+            ]);
+        }
 
-        RoomModel::create([
-            'room_number' => '103',
-            'price_per_night' => 750000,
-            'is_booked' => false,
-            'description' => 'Kamar Deluxe dengan fasilitas lengkap.',
-            'capacity' => 2,
-            'type_id' => 1,
-        ]);
+        for ($i = 201; $i <= 208; $i++) {
+            RoomModel::create([
+                'room_number' => (string) $i,
+                'is_booked' => false,
+                'capacity' => 3,
+                'type_id' => 2,
+            ]);
+        }
 
-        RoomModel::create([
-            'room_number' => '104',
-            'price_per_night' => 850000,
-            'is_booked' => false,
-            'description' => 'Kamar Premium dengan pemandangan taman.',
-            'capacity' => 3,
-            'type_id' => 2,
-        ]);
-
-        RoomModel::create([
-            'room_number' => '105',
-            'price_per_night' => 850000,
-            'is_booked' => false,
-            'description' => 'Kamar Premium dengan balkon pribadi.',
-            'capacity' => 3,
-            'type_id' => 2,
-        ]);
-
-        RoomModel::create([
-            'room_number' => '106',
-            'price_per_night' => 850000,
-            'is_booked' => false,
-            'description' => 'Kamar Premium cocok untuk keluarga kecil.',
-            'capacity' => 3,
-            'type_id' => 2,
-        ]);
-
-        RoomModel::create([
-            'room_number' => '107',
-            'price_per_night' => 1200000,
-            'is_booked' => false,
-            'description' => 'Suite Room dengan ruang tamu dan pemandangan kota.',
-            'capacity' => 4,
-            'type_id' => 3,
-        ]);
-
-        RoomModel::create([
-            'room_number' => '108',
-            'price_per_night' => 1200000,
-            'is_booked' => false,
-            'description' => 'Suite Room dengan fasilitas mewah dan bathtub.',
-            'capacity' => 4,
-            'type_id' => 3,
-        ]);
+        for ($i = 301; $i <= 308; $i++) {
+            RoomModel::create([
+                'room_number' => (string) $i,
+                'is_booked' => false,
+                'capacity' => 2,
+                'type_id' => 3,
+            ]);
+        }
     }
 }

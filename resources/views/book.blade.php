@@ -23,7 +23,7 @@
             flatpickr("#dateRange", {
                 mode: "range",
                 minDate: "today",
-                dateFormat: "d-m-y",
+                dateFormat: "Y-m-d",
                 showMonths: 2,
             });
         </script>
@@ -49,9 +49,10 @@
                     <div class="mb-3">Deskripsi :</div>
                     <div id="desc" class="tab-pane fade show active">
                         <p>{{ $type->description }}</p>
-
+                        <p><strong>Rp {{ number_format($type['price_per_night'], 0, ',', '.') }}</strong> / night</p>
                     </div>
                     <a href="#searchSection" class="btn btn-success px-4 py-2 fw-bold mt-3">Reserve now</a>
+                    <a href="{{ route('types.show', $type->id) }}" class="btn btn-primary px-4 py-2 fw-bold mt-3">View Details</a>
                 </div>
             </div>
             <hr class="my-5">

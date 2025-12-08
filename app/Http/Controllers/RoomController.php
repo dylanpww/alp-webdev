@@ -12,12 +12,12 @@ class RoomController extends Controller
 
     public function index()
     {
-        $rooms = RoomModel::all();
-        return view('room', compact('rooms'));
+        $room = RoomModel::all();
+        return view('room-details', compact('room'));
     }
     public function create()
     {
-        $types = RoomModel::all();
+        $types = TypeModel::all();
         return view('admin_view.create_room', compact('types'));
     }
 
@@ -25,20 +25,15 @@ class RoomController extends Controller
     {
         
 
-        dd($request->file('images'));
-
         $request->validate([
             'room_number' => 'required|unique:rooms',
-            'price_per_night' => 'required|numeric',
             'capacity' => 'required|integer',
             'type_id' => 'required',
-            'description' => 'nullable',
+            
         ]);
 
-        $room = RoomModel::create([
+        RoomModel::create([
             'room_number' => $request->room_number,
-            'price_per_night' => $request->price_per_night,
-            'description' => $request->description,
             'capacity' => $request->capacity,
             'type_id' => $request->type_id
         ]);

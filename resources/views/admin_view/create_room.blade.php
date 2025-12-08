@@ -16,13 +16,6 @@
                     <label class="form-label">Room Number</label>
                     <input type="text" name="room_number" class="form-control" required>
                 </div>
-
-                
-                <div class="mb-3">
-                    <label class="form-label">Price per Night</label>
-                    <input type="number" step="0.01" name="price_per_night" class="form-control" required>
-                </div>
-
                 
                 <div class="mb-3">
                     <label class="form-label">Capacity</label>
