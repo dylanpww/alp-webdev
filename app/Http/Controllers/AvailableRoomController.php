@@ -36,12 +36,12 @@ class AvailableRoomController extends Controller
 
             if ($freeRoomsCount > 0) {
                 $availableTypes[] = [
-                    'id'          => $type->id,
-                    'type_name'   => $type->name,
-                    'price'       => $type->price_per_night,
-                    'count'       => $freeRoomsCount,
-                    'image'       => $type->images->first()->url ?? 'default.jpg',
-                    'description' => $type->description
+                    'id'=>$type->id,
+                    'type_name'=>$type->name,
+                    'price'=>$type->price_per_night,
+                    'count'=>$freeRoomsCount,
+                    'image'=>$type->images->first()->url ?? 'default.jpg',
+                    'description'=>$type->description
                 ];
             }
         }

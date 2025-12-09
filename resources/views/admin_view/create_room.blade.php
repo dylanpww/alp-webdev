@@ -3,7 +3,7 @@
 @section('konten')
 <div class="container my-5">
     <div class="card shadow">
-        <div class="card-header bg-primary text-white">
+        <div class="card-header">
             <h4 class="m-0">Add New Room</h4>
         </div>
 
@@ -41,7 +41,7 @@
                 </div>
 
 
-                <button type="submit" class="btn btn-success">Add Room</button>
+                <button type="submit" class="btn" style="background-color: #BA8B4E; border-color: #BA8B4E;">Add Room</button>
             </form>
         </div>
     </div>

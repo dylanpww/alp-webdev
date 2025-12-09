@@ -12,7 +12,7 @@
             <form action="{{ route('rooms.search') }}" method="GET">
                 <label for="dateRange" class="form-label fw-semibold">Choose Stay Dates:</label>
                 <input id="dateRange" name="dates" class="form-control mb-3" placeholder="Select check-in and check-out">
-                <button class="btn btn-primary fw-bold px-4 mt-2">
+                <button class="btn btn-primary fw-bold px-4 mt-2"style="background-color: #BA8B4E; border-color: #BA8B4E;">
                     Search
                 </button>
             </form>
@@ -51,8 +51,8 @@
                         <p>{{ $type->description }}</p>
                         <p><strong>Rp {{ number_format($type['price_per_night'], 0, ',', '.') }}</strong> / night</p>
                     </div>
-                    <a href="#searchSection" class="btn btn-success px-4 py-2 fw-bold mt-3">Reserve now</a>
-                    <a href="{{ route('types.show', $type->id) }}" class="btn btn-primary px-4 py-2 fw-bold mt-3">View Details</a>
+                    <a href="#searchSection" class="btn btn-success px-4 py-2 fw-bold mt-3" style="background-color: #BA8B4E; border-color: #BA8B4E;">Reserve now</a>
+                    <a href="{{ route('types.show', $type->id) }}" class="btn btn-primary px-4 py-2 fw-bold mt-3" style="background-color: #BA8B4E; border-color: #BA8B4E;">View Details</a>
                 </div>
             </div>
             <hr class="my-5">

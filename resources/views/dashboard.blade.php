@@ -1,17 +1,25 @@
-{{-- <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layout.main-layout')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
+@section('title', 'Create Facility')
+
+@section('konten')
+
+    
+
+    <div class="col mx-auto text-center mt-4 gap-3 my-5">
+        <h2>manager dashboard view</h2>
+        <a href="{{ route('types.create') }}" class="btn text-white fw-semibold" style="background-color: #BA8B4E; border-color: #BA8B4E;">
+            + Create New Type
+        </a>
+        <a href="{{ route('rooms.create') }}" class="btn text-white fw-semibold" style="background-color: #BA8B4E; border-color: #BA8B4E;">
+            + Create New Room
+        </a>
+        <a href="{{ route(name: 'rents.create') }}" class="btn text-white fw-semibold" style="background-color: #BA8B4E; border-color: #BA8B4E;">
+            + Create New Rents
+        </a>
+        <a href="{{ route('facility.create') }}" class="btn text-white fw-semibold" style="background-color: #BA8B4E; border-color: #BA8B4E;">
+            + Create New Facility
+        </a>
     </div>
-</x-app-layout> --}}
+
+@endsection

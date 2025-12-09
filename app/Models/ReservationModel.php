@@ -20,6 +20,7 @@ class ReservationModel extends Model
         "type",
         "user_id",
         "room_id",
+        "rental_id"
     ];
 
     public function user()
@@ -30,5 +31,9 @@ class ReservationModel extends Model
     public function room()
     {
         return $this->belongsTo(RoomModel::class, 'room_id', 'id');
+    }
+    public function rental()
+    {
+        return $this->belongsTo(RentMotorcycleModel::class, 'rental_id', 'id');
     }
 }

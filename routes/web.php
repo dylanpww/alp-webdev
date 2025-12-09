@@ -6,6 +6,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RentMotorcycle;
 use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\TypeController;
@@ -16,7 +17,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['manager'])->name('dashboard');
 
 
 //public view routes
@@ -26,10 +27,11 @@ Route::get('/rent-motorcycle', [RentMotorcycle::class, 'index'])->name('rents.in
 Route::get('/room-details/{id}', [TypeController::class, 'show'])->name('types.show');
 
 
+
 Route::middleware('manager')->group(function () {
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/create_room', [RoomController::class, 'create'])->name('rooms.create');
     Route::post('/create_room', [RoomController::class, 'store'])->name('rooms.store');
     Route::get('/create_rental', [RentMotorcycle::class, 'create'])->name('rents.create');

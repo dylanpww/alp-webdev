@@ -23,7 +23,7 @@
 
         <div class="col-md-5 col-lg-4">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-primary">Order Summary</span>
+                <span class="text">Order Summary</span>
             </h4>
             
             <ul class="list-group mb-3 shadow-sm">
@@ -32,7 +32,7 @@
                     
                     <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
                         <div>
-                            <h6 class="my-0 text-primary fw-bold">Motorcycle Rental</h6>
+                            <h6 class="my-0 fw-bold">Motorcycle Rental</h6>
                             <small class="text-muted">{{ $rental->name }}</small>
                         </div>
                         <span class="text-muted">Rp {{ number_format($rental->price_per_day, 0, ',', '.') }} /day</span>
@@ -41,7 +41,7 @@
                     
                     <li class="list-group-item d-flex justify-content-between lh-sm bg-light">
                         <div>
-                            <h6 class="my-0 text-primary fw-bold">Hotel Reservation</h6>
+                            <h6 class="my-0 fw-bold">Hotel Reservation</h6>
                             <small class="text-muted">{{ $type->name }}</small>
                         </div>
                         <span class="text-muted">Rp {{ number_format($type->price_per_night, 0, ',', '.') }} /night</span>
@@ -69,31 +69,25 @@
 
                 <li class="list-group-item d-flex justify-content-between bg-white">
                     <span class="fw-bold fs-5">Total (IDR)</span>
-                    <strong class="fs-5 text-success">Rp {{ number_format($total_price, 0, ',', '.') }}</strong>
+                    <strong class="fs-5">Rp {{ number_format($total_price, 0, ',', '.') }}</strong>
                 </li>
             </ul>
-
-            {{-- Dynamically choose the route based on type --}}
             <form action="{{ (isset($is_rental) && $is_rental) ? route('reservations.storeRental') : route('reservations.storeRoom') }}" method="POST">
                 @csrf
-                
-                {{-- HIDDEN INPUTS: Pass data to controller --}}
                 <input type="hidden" name="check_in_date" value="{{ $start_date }}">
                 <input type="hidden" name="check_out_date" value="{{ $end_date }}">
                 <input type="hidden" name="total_price" value="{{ $total_price }}">
 
                 @if(isset($is_rental) && $is_rental)
-                    {{-- Hidden Input for Rental ID --}}
                     <input type="hidden" name="rental_id" value="{{ $rental->id }}">
                 @else
-                    {{-- Hidden Input for Room Type ID --}}
                     <input type="hidden" name="type_id" value="{{ $type->id }}">
                 @endif
 
-                <button class="w-100 btn btn-primary btn-lg fw-bold" type="submit">
+                <button class="w-100 btn btn-lg fw-bold" type="submit">
                     Confirm & Pay
                 </button>
-                <a href="{{ url()->previous() }}" class="w-100 btn btn-outline-secondary mt-2">Cancel</a>
+                <a href="{{ url()->previous() }}" class="w-100 btn text-white fw-bold mt-2" style="background-color: #BA8B4E; border-color: #BA8B4E;" >Cancel</a>
             </form>
 
         </div>

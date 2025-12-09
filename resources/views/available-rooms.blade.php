@@ -26,7 +26,7 @@
                                 <input type="hidden" name="start_date" value="{{ $start }}">
                                 <input type="hidden" name="end_date" value="{{ $end }}">
 
-                                <button class="btn btn-primary w-100">
+                                <button class="btn btn-primary w-100" style="background-color: #BA8B4E; border-color: #BA8B4E;">
                                     Choose This Type
                                 </button>
                             </form>

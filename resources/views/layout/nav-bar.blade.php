@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark shadow-sm " style="background:  #f3f3ea">
     <div class="container py-1">
         <a class="navbar-brand fw-bold text-black fs-4" href="/">
-            <img src="{{ asset('logo_sarang.png') }}" alt="Sarang Logo" class="img-fluid" style="height: 70px; width: auto;">
+            <img src="{{ asset('logo_sarang.png') }}" alt="Sarang Logo" class="img-fluid"
+                style="height: 70px; width: auto;">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -25,35 +26,46 @@
                         Rent a Motorcycle!
                     </a>
                 </li>
-                {{-- <li class="nav-item mx-2">
-                    <a class="nav-link {{ Request::is('cart') ? 'active' : '' }}" href="/cart">
-                        View Cart
-                    </a>
-                </li> --}}
+
 
                 <li class="nav-item mx-2">
                     @auth
-                        @if (Auth::user()->status === 'admin')
-                            <a class="nav-link {{ Request::is('admin') ? 'active' : '' }}" href="/admin">Admin</a>
+                        @if (Auth::user()->role === 'manager')
+                            <a class="nav-link {{ Request::is('manager') ? 'active' : '' }}" href="/dashboard">manager
+                                dashboard</a>
                         @endif
                     @endauth
                 </li>
 
 
 
-                <li class="nav-item mx-2">
+                <li class="nav-item dropdown mx-2">
                     @auth
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="btn">Log Out</button>
-                        </form>
-                    @endauth
-                    @guest
-                        <a class="nav-link {{ Request::is('login') ? 'active' : '' }}" href="/login">
-                            Login
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ Auth::user()->name }}
                         </a>
-                    @endguest
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                                    My Profile & Bookings
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item text-danger">Log Out</button>
+                                </form>
+                            </li>
+                        </ul>
+                    @endauth
 
+                    @guest
+                        <a class="nav-link {{ Request::is('login') ? 'active' : '' }}" href="/login">Login</a>
+                    @endguest
                 </li>
             </ul>
         </div>

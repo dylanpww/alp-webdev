@@ -15,7 +15,7 @@
             <form action="{{ route('rents.search') }}" method="GET">
                 <label for="dateRange" class="form-label fw-semibold">Choose Rental Dates:</label>
                 <input id="dateRange" name="dates" class="form-control mb-3" placeholder="Select rental dates">
-                <button class="btn btn-primary fw-bold px-4 mt-2">Search</button>
+                <button class="btn btn-primary fw-bold px-4 mt-2" style="background-color: #BA8B4E; border-color: #BA8B4E;">Search</button>
             </form>
         </div>
 
@@ -51,10 +51,10 @@
 
                     <div class="mt-3">
                         <strong>Price per day:</strong>
-                        <p class="fs-5 text-success fw-bold">Rp {{ number_format($rent->price_per_day, 0, ',', '.') }}</p>
+                        <p class="fs-5 fw-bold">Rp {{ number_format($rent->price_per_day, 0, ',', '.') }}</p>
                     </div>
 
-                    <a href="#searchSection" class="btn btn-success px-4 py-2 fw-bold mt-3">
+                    <a href="#searchSection" class="btn btn-success px-4 py-2 fw-bold mt-3 "style="background-color: #BA8B4E; border-color: #BA8B4E;">
                         Reserve Now
                     </a>
                 </div>

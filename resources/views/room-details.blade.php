@@ -10,7 +10,7 @@
         </div>
         <div class="col-md-6">
             <h2 class="fw-bold">{{ $room->type_name }}</h2>
-            <h4 class="text-success">Rp {{ number_format($room->price, 0, ',', '.') }} <small class="text-muted fs-6">/ night</small></h4>
+            <h4 class="">Rp {{ number_format($room->price, 0, ',', '.') }} <small class="text-muted fs-6">/ night</small></h4>
             
             <hr>
 
@@ -19,7 +19,7 @@
 
             <div class="card bg-light border-0 p-3 mt-4">
                 <form action="{{ route('types.index') }}" method="GET">
-                    <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">
+                    <button type="submit" class="btn w-100 py-2 fw-bold">
                         Book This Room Type
                     </button>
                 </form>
@@ -63,7 +63,7 @@
                                 <label class="form-label">Comment</label>
                                 <textarea name="comment" class="form-control" rows="3" required placeholder="Share your experience..."></textarea>
                             </div>
-                            <button class="btn btn-success">Submit Review</button>
+                            <button class="btn" style="background-color: #BA8B4E; border-color: #BA8B4E; ">Submit Review</button>
                         </form>
                     </div>
                 </div>

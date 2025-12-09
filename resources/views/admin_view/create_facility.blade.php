@@ -5,7 +5,7 @@
 @section('konten')
     <div class="container my-5">
         <div class="card shadow">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header">
                 <h4 class="m-0">Create New Facility</h4>
             </div>
 
@@ -26,7 +26,7 @@
                         <small class="text-muted">You can upload multiple images</small>
                     </div>
 
-                    <button class="btn btn-primary">Create Facility</button>
+                    <button class="btn" style="background-color: #BA8B4E; border-color: #BA8B4E;">Create Facility</button>
                 </form>
 
             </div>
