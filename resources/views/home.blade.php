@@ -35,7 +35,7 @@
                     Located on Jl. Raya Semat, we are your quiet sanctuary close to the best cafes
                     and entertainment Canggu has to offer.
                 </p>
-                <a href="{{ route('types.index') }}" class="btn btn-primary btn-lg mt-3" style="background-color: #BA8B4E; border-color: #BA8B4E; ">Book Your Stay</a>
+                <a href="{{ route('types.book') }}" class="btn btn-primary btn-lg mt-3" style="background-color: #BA8B4E; border-color: #BA8B4E; ">Book Your Stay</a>
             </div>
         </div>
     </div>

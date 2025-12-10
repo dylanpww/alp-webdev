@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\RentMotorcycleReviewModel;
 
 class RentMotorcycleModel extends Model
 {
@@ -16,4 +17,8 @@ class RentMotorcycleModel extends Model
         'price_per_day',
         'url',
     ];
+    public function reviews()
+    {
+        return $this->hasMany(RentMotorcycleReviewModel::class, 'rent_motorcycle_id');
+    }
 }

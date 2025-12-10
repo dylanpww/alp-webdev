@@ -97,7 +97,7 @@ class ReservationController extends Controller
     public function createRental(Request $request)
     {
         $request->validate([
-            'rental_id'  => 'required|exists:rentals,id',
+            'rental_id'  => 'required|exists:rent_motorcycles,id',
             'start_date' => 'required|date|after_or_equal:today',
             'end_date'   => 'required|date|after:start_date',
         ]);
@@ -121,7 +121,7 @@ class ReservationController extends Controller
     public function storeRental(Request $request)
     {
         $request->validate([
-            'rental_id'=> 'required|exists:rentals,id',
+            'rental_id'=> 'required|exists:rent_motorcycles,id',
             'check_in_date'=> 'required|date',
             'check_out_date'=> 'required|date',
             'total_price'=> 'required|numeric',

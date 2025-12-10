@@ -5,12 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\TypeModel;
 use App\Models\TypeImagesModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TypeController extends Controller
 {
     public function index()
     {
         $types = TypeModel::all();
+        return view('admin_view.type', compact('types'));
+    }
+
+    public function book()
+    {
+        $types = TypeModel::with('images')->get();
         return view('book', compact('types'));
     }
 
@@ -25,7 +32,7 @@ class TypeController extends Controller
             'name' => 'required|unique:types,name',
             'description' => 'nullable',
             'price_per_night' => 'required|numeric',
-            'images.*' => 'image|max:10000'
+            'images.*' => 'image|max:20480'
         ]);
 
         $type = TypeModel::create([
@@ -68,5 +75,57 @@ class TypeController extends Controller
         return view('room-details', [
             'room' => $roomData
         ]);
+    }
+    public function edit($id)
+    {
+        $type = TypeModel::with('images')->findOrFail($id);
+
+        return view('admin_view.update_type', compact('type'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $type = TypeModel::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|unique:types,name,' . $type->id,
+            'description' => 'nullable',
+            'price_per_night' => 'required|numeric',
+            'images.*' => 'image|max:20480'
+        ]);
+
+        $type->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price_per_night' => $request->price_per_night,
+        ]);
+
+        if ($request->hasFile('images')) {
+
+            $folderName = 'type_images/' . str_replace(' ', '_', strtolower($type->name));
+
+            foreach ($request->file('images') as $img) {
+                $path = $img->store($folderName, 'public');
+                
+                TypeImagesModel::create([
+                    'type_id' => $type->id,
+                    'url' => $path
+                ]);
+            }
+        }
+
+        return redirect()->route('types.index')->with('success', 'Room Type updated successfully!');
+    }
+    public function destroy($id)
+    {
+        $facility = TypeModel::with('images')->findOrFail($id);
+        foreach ($facility->images as $img) {
+            Storage::disk('public')->delete($img->url);
+            $img->delete();
+        }
+
+        $facility->delete();
+
+        return redirect()->route('home');
     }
 }

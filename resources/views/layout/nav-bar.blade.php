@@ -28,11 +28,37 @@
                 </li>
 
 
-                <li class="nav-item mx-2">
+                <li class="nav-item dropdown mx-2">
                     @auth
                         @if (Auth::user()->role === 'manager')
-                            <a class="nav-link {{ Request::is('manager') ? 'active' : '' }}" href="/dashboard">manager
-                                dashboard</a>
+                            <a class="nav-link dropdown-toggle {{ Request::is('manager/*') ? 'active': '' }}"
+                        href="#" id="managerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Manager Dashboard
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="managerDropdown">
+
+                <li>
+                    <a class="dropdown-item {{ Request::is('manager/type*') ? 'active' : '' }}" 
+                    href="/admin_view/type">Type</a>
+                </li>
+
+                <li>
+                    <a class="dropdown-item {{ Request::is('manager/room*') ? 'active' : '' }}" 
+                    href="/admin_view/room">Room</a>
+                </li>
+
+                <li>
+                    <a class="dropdown-item {{ Request::is('manager/rents*') ? 'active' : '' }}" 
+                    href="/admin_view/rents">Rents</a>
+                </li>
+
+                <li>
+                    <a class="dropdown-item {{ Request::is('manager/facility*') ? 'active' : '' }}" 
+                    href="/admin_view/facility">Facility</a>
+                </li>
+
+            </ul>
                         @endif
                     @endauth
                 </li>

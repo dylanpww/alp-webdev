@@ -9,11 +9,17 @@ use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
+    
 
     public function index()
     {
-        $room = RoomModel::all();
-        return view('room-details', compact('room'));
+        $rooms = RoomModel::all();
+        return view('admin_view.room', compact('rooms'));
+    }
+    public function room()
+    {
+        $rooms = TypeModel::with('images')->get();
+        return view('room-details', compact('types'));
     }
     public function create()
     {
@@ -38,6 +44,40 @@ class RoomController extends Controller
             'type_id' => $request->type_id
         ]);
 
+
+        return redirect()->route('rooms.index');
+    }
+    public function edit($id)
+    {
+        $room = RoomModel::findOrFail($id);
+        $types = TypeModel::all(); 
+        
+        return view('admin_view.update_room', compact('room', 'types'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $room = RoomModel::findOrFail($id);
+
+        $request->validate([
+            'room_number' => 'required|unique:rooms,room_number,' . $room->id,
+            'type_id' => 'required|exists:types,id',
+            'status' => 'required'
+        ]);
+
+        $room->update([
+            'room_number' => $request->room_number,
+            'type_id' => $request->type_id,
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('rooms.index');
+    }
+
+    public function destroy($id)
+    {
+        $room = RoomModel::findOrFail($id);
+        $room->delete();
 
         return redirect()->route('rooms.index');
     }

@@ -1,41 +1,57 @@
 @extends('layout.main-layout')
-@section('title', "Available Rooms")
+@section('title', 'Available Motorcycles')
 
 @section('konten')
     <div class="container mt-4">
 
-        <h2>Available Room Types</h2>
+        <h2>Available Motorcycles</h2>
         <p>From <strong>{{ $start }}</strong> to <strong>{{ $end }}</strong></p>
 
         <div class="row mt-4">
 
-            @forelse ($types as $type)
+            @forelse ($rents as $rent)
                 <div class="col-md-4">
-                    <div class="card mb-4 shadow">
+                    <div class="card mb-4 shadow h-100">
 
-                        <img src="{{ asset('storage/' . $type['image']) }}" class="card-img-top"
-                            style="height:200px;object-fit:cover;">
+                        @if ($rent->url)
+                            <img src="{{ asset('storage/' . $rent->url) }}" class="card-img-top"
+                                style="height:200px; object-fit:cover;">
+                        @else
+                            <div class="bg-secondary text-white card-img-top d-flex align-items-center justify-content-center"
+                                style="height: 200px;">No Image</div>
+                        @endif
 
-                        <div class="card-body">
-                            <h4>{{ $type['type_name'] }}</h4>
-                            <p><strong>Rp {{ number_format($type['price'], 0, ',', '.') }}</strong> / night</p>
-                            <p>{{ $type['count'] }} rooms available</p>
+                        <div class="card-body d-flex flex-column">
+                            <h4>{{ $rent->name }}</h4>
+                            <p><strong>Rp {{ number_format($rent->price_per_day, 0, ',', '.') }}</strong> / day</p>
 
-                            <form action="{{ route('reservations.createRental') }}" method="GET">
-                                <input type="hidden" name="type_id" value="{{ $type['id'] }}">
-                                <input type="hidden" name="start_date" value="{{ $start }}">
-                                <input type="hidden" name="end_date" value="{{ $end }}">
+                            <div class="mt-auto">
+                                {{-- FORM KE RESERVATION (PAYMENT) --}}
+                                <form action="{{ route('reservations.createRental') }}" method="GET">
+                                    {{-- Menggunakan nama 'rental_id' sesuai validasi controller --}}
+                                    <input type="hidden" name="rental_id" value="{{ $rent->id }}">
+                                    <input type="hidden" name="start_date" value="{{ $start }}">
+                                    <input type="hidden" name="end_date" value="{{ $end }}">
 
-                                <button class="btn btn-primary w-100" style="background-color: #BA8B4E; border-color: #BA8B4E;">
-                                    Choose This Type
-                                </button>
-                            </form>
+                                    <button class="btn btn-primary w-100"
+                                        style="background-color: #BA8B4E; border-color: #BA8B4E;">
+                                        Choose This Motor
+                                    </button>
+                                </form>
+                            </div>
 
                         </div>
                     </div>
                 </div>
             @empty
-                <p>No rooms available for these dates.</p>
+                <div class="col-12">
+                    <div class="alert alert-warning text-center">
+                        No motorcycles available for these dates.
+                    </div>
+                    <div class="text-center">
+                        <a href="{{ route('rents.rent') }}" class="btn btn-secondary">Back to Search</a>
+                    </div>
+                </div>
             @endforelse
 
         </div>
