@@ -13,6 +13,27 @@ use Midtrans\Snap;
 
 class ReservationController extends Controller
 {
+
+    public function showAll(Request $request)
+    {
+        $reservations = ReservationModel::with(['user', 'room.type', 'rental'])->latest();
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+
+            $reservations->where(function ($q) use ($search) {
+                $q->where('id', 'LIKE', "%{$search}%")
+                    ->orWhereHas('user', function ($subQuery) use ($search) {
+                        $subQuery->where('name', 'LIKE', "%{$search}%")
+                            ->orWhere('email', 'LIKE', "%{$search}%");
+                    });
+            });
+        }
+
+        $reservations = $reservations->get();
+        return view("admin_view.reservations", compact('reservations'));
+    }
+
     public function createRoom(Request $request)
     {
         $request->validate([
@@ -121,20 +142,20 @@ class ReservationController extends Controller
     public function storeRental(Request $request)
     {
         $request->validate([
-            'rental_id'=> 'required|exists:rent_motorcycles,id',
-            'check_in_date'=> 'required|date',
-            'check_out_date'=> 'required|date',
-            'total_price'=> 'required|numeric',
+            'rental_id' => 'required|exists:rent_motorcycles,id',
+            'check_in_date' => 'required|date',
+            'check_out_date' => 'required|date',
+            'total_price' => 'required|numeric',
         ]);
         $reservation = ReservationModel::create([
-            'user_id'=> Auth::id(),
-            'room_id'=> null,
-            'rental_id'=> $request->rental_id,
-            'check_in_date'=> $request->check_in_date,
-            'check_out_date'=> $request->check_out_date,
-            'total_price'=> $request->total_price,
-            'status'=> 'Pending', 
-            'type'=> 'Rental',
+            'user_id' => Auth::id(),
+            'room_id' => null,
+            'rental_id' => $request->rental_id,
+            'check_in_date' => $request->check_in_date,
+            'check_out_date' => $request->check_out_date,
+            'total_price' => $request->total_price,
+            'status' => 'Pending',
+            'type' => 'Rental',
         ]);
 
         Config::$serverKey = config('midtrans.server_key');

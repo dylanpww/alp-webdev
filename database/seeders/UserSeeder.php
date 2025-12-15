@@ -19,5 +19,13 @@ class UserSeeder extends Seeder
             'password' => '12345678',
             'phone' => '081234567890'
         ]);
+
+        User::create([
+            'name' => 'shatrya',
+            'email' => 'shatryaa@localhost.com',
+            'role' => 'receptionist',
+            'password' => '12345678',
+            'phone' => '081234567890'
+        ]);
     }
 }

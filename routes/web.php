@@ -15,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// ->middleware(['manager'])->name('dashboard');
+
+Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
 //public view routes
@@ -29,10 +31,7 @@ Route::get('/room-details/{id}', [TypeController::class, 'show'])->name('types.s
 
 
 Route::middleware('manager')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+Route::get('/dashboard', function () {return view('dashboard');});
     Route::get('/admin_view/room', [RoomController::class, 'index'])->name('rooms.index');
     Route::get('/admin_view/room/create', [RoomController::class, 'create'])->name('rooms.create');
     Route::post('/admin_view/room', [RoomController::class, 'store'])->name('rooms.store');
@@ -63,6 +62,14 @@ Route::middleware('manager')->group(function () {
 
     Route::resource('rooms', RoomController::class);
     Route::post('/ratings/{id}/reviews', [RatingController::class, 'store'])->name('ratings.store');
+
+    Route::get('/admin_view/users', [ProfileController::class, 'usersIndex'])->name('users.index');
+    Route::get('/admin/users/{id}/edit', [ProfileController::class, 'usersEdit'])->name('users.edit');
+    Route::patch('/admin/users/{id}', [ProfileController::class, 'usersUpdate'])->name('users.update');
+});
+
+Route::middleware('role:manager,receptionist')->group(function () {
+    Route::get('/admin_view/reservations', [ReservationController::class, 'showAll'])->name('reservations.index');
 });
 
 Route::middleware('auth')->group(function () {
@@ -74,7 +81,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/rental-reservation', [ReservationController::class, 'createRental'])->name('reservations.createRental');
     Route::post('/rental-reservation', [ReservationController::class, 'storeRental'])->name('reservations.storeRental');
     Route::get('/payment', [PaymentController::class, 'payment'])->name('payment.show');
-
 });
 
 require __DIR__ . '/auth.php';

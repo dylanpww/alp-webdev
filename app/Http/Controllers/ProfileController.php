@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -18,7 +19,7 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
         $reservations = ReservationModel::where('user_id', $request->user()->id)
-            ->with(['room.type', 'rental']) 
+            ->with(['room.type', 'rental'])
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -63,5 +64,43 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function usersIndex(Request $request): View
+    {
+        // Ambil semua user urut dari terbaru
+        $users = User::latest();
+
+        // Jika ada input search dari user
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $users->where(function ($q) use ($search) {
+                $q->where('name', 'LIKE', "%{$search}%")
+                    ->orWhere('email', 'LIKE', "%{$search}%");
+            });
+        }
+
+        $users = $users->get();
+
+        return view('admin_view.users', compact('users'));
+    }
+
+    public function usersEdit($id): View
+    {
+        $user = User::findOrFail($id);
+        return view('admin_view.users_edit', compact('user'));
+    }
+
+    public function usersUpdate(Request $request, $id): RedirectResponse
+    {
+        $user = User::findOrFail($id);
+        $request->validate([
+            'role' => 'required|in:manager,receptionist,user',
+        ]);
+        $user->update([
+            'role' => $request->role,
+        ]);
+
+        return Redirect::route('users.index');
     }
 }

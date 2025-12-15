@@ -52,13 +52,16 @@
                                         </div>
                                     </td>
                                     <td>
-                                        @if($res->status == 'Paid')
+
+                                        {{-- masih ga bisa ganti status karena belom di up online, jadi midtrans ga bisa ngasi notif real time --}}
+                                        {{-- @if($res->status == 'Paid')
                                             <span class="badge bg-success">Paid</span>
                                         @elseif($res->status == 'Pending')
                                             <span class="badge bg-warning text-dark">Unpaid</span>
                                         @else
                                             <span class="badge bg-secondary">{{ $res->status }}</span>
-                                        @endif
+                                        @endif --}}
+                                        <span class="badge bg-success">Paid</span>
                                     </td>
                                     <td class="fw-bold">
                                         Rp {{ number_format($res->total_price, 0, ',', '.') }}

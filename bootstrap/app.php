@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Middleware\CheckRole;
+use App\Http\Middleware\CheckManager;
+use App\Http\Middleware\CheckReceptionist;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -14,8 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->alias([
             // 'auth' => \App\Http\Middleware\Authenticate::class,
-            'manager' => \App\Http\Middleware\CheckManager::class,
-            'receptionist' => \App\Http\Middleware\CheckReceptionist::class,
+            'manager' => CheckManager::class,
+            'receptionist' => CheckReceptionist::class,
+            'role'=>CheckRole::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

@@ -8,7 +8,7 @@
         <p>Your Order ID: {{ $reservation->id }}</p>
         <h3 class="fw-bold">Rp {{ number_format($reservation->total_price) }}</h3>
         
-        <button id="pay-button" class="btn btn-primary btn-lg mt-4 w-100">Pay Now</button>
+        <button id="pay-button" class="btn btn-lg mt-4 w-100" style="background-color: #BA8B4E; border-color: #BA8B4E;">Pay Now</button>
     </div>
 </div>
 
