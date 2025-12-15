@@ -12,18 +12,17 @@
                     <p class="text-muted text-center py-3">There is no booking history yet.</p>
                 @else
 
-                <div class="row mb-3">
-                <div class="col-md-6">
-                    <form action="{{ route('reservations.index') }}" method="GET">
-                        <div class="input-group">
-                            <input type="text" name="search" class="form-control" 
-                                placeholder="Search by name or email..." 
-                                value="{{ request('search') }}">
-                            <button class="btn btn-primary" type="submit">Search</button>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <form action="{{ route('reservations.index') }}" method="GET">
+                                <div class="input-group">
+                                    <input type="text" name="search" class="form-control"
+                                        placeholder="Search by name or email..." value="{{ request('search') }}">
+                                    <button class="btn btn-primary" type="submit">Search</button>
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                </div>
-            </div>
+                    </div>
 
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">
@@ -53,7 +52,7 @@
                                         <td>
                                             @if ($res->user)
                                                 <strong>{{ $res->user->email }}</strong>
-                                                @else
+                                            @else
                                                 <span class="text-muted fst-italic">User Deleted</span>
                                             @endif
                                         </td>
@@ -83,15 +82,15 @@
                                         </td>
                                         <td>
 
-                                            {{-- masih ga bisa ganti status karena belom di up online, jadi midtrans ga bisa ngasi notif real time --}}
-                                            {{-- @if ($res->status == 'Paid')
-                                            <span class="badge bg-success">Paid</span>
-                                        @elseif($res->status == 'Pending')
-                                            <span class="badge bg-warning text-dark">Unpaid</span>
-                                        @else
-                                            <span class="badge bg-secondary">{{ $res->status }}</span>
-                                        @endif --}}
-                                            <span class="badge bg-success">Paid</span>
+
+                                            @if ($res->status == 'Paid')
+                                                <span class="badge bg-success">Paid</span>
+                                            @elseif($res->status == 'Pending')
+                                                <span class="badge bg-warning text-dark">Unpaid</span>
+                                            @else
+                                                <span class="badge bg-secondary">{{ $res->status }}</span>
+                                            @endif
+                                            
                                         </td>
                                         <td class="fw-bold">
                                             Rp {{ number_format($res->total_price, 0, ',', '.') }}

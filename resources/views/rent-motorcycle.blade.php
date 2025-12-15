@@ -53,11 +53,6 @@
                         style="background-color: #BA8B4E; border-color: #BA8B4E;">
                         Reserve Now
                     </a>
-
-                    <a href="{{ route('rents.show', $rent->id) }}" class="btn btn-outline-secondary px-4 py-2 fw-bold mt-3"
-                        style="background-color: #BA8B4E; border-color: #BA8B4E; color:white">
-                        View Details
-                    </a>
                 </div>
             </div>
             <hr class="my-5">

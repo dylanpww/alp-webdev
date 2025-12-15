@@ -16,7 +16,7 @@ class ReservationController extends Controller
 
     public function showAll(Request $request)
     {
-        $reservations = ReservationModel::with(['user', 'room.type', 'rental'])->latest();
+        $reservations = ReservationModel::with(['user', 'room.type', 'rental', 'payment'])->latest();
 
         if ($request->has('search') && $request->search != '') {
             $search = $request->search;

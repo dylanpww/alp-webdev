@@ -16,6 +16,7 @@ class RentMotorcycleModel extends Model
         'name',
         'price_per_day',
         'url',
+        'is_booked'
     ];
     public function reviews()
     {

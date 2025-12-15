@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('price_per_day');
             $table->string('url')->nullable();
+            $table->boolean('is_booked')->default(false);
             $table->timestamps();
         });
     }

@@ -42,15 +42,6 @@ class RentMotorcycle extends Controller
         return redirect()->route('rents.rent');
     }
 
-    public function show($id)
-    {
-        $rent = RentMotorcycleModel::with('reviews.user')->findOrFail($id);
-        
-        $average_rating = $rent->reviews->avg('rating') ?? 0;
-
-        return view('rent-details', compact('rent', 'average_rating'));
-    }
-
     public function storeReview(Request $request, $id)
     {
         $request->validate([

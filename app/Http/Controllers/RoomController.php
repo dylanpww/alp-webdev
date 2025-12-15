@@ -9,11 +9,16 @@ use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
-    
+
 
     public function index()
     {
-        $rooms = RoomModel::all();
+        $today = date('Y-m-d');
+        $rooms = RoomModel::with(['type', 'reservations' => function ($query) use ($today) {
+            $query->where('status', '!=', 'Cancelled') 
+                ->where('check_in_date', '<=', $today) 
+                ->where('check_out_date', '>', $today);
+        }])->get();
         return view('admin_view.room', compact('rooms'));
     }
     public function room()
@@ -29,13 +34,13 @@ class RoomController extends Controller
 
     public function store(Request $request)
     {
-        
+
 
         $request->validate([
             'room_number' => 'required|unique:rooms',
             'capacity' => 'required|integer',
             'type_id' => 'required',
-            
+
         ]);
 
         RoomModel::create([
@@ -50,8 +55,8 @@ class RoomController extends Controller
     public function edit($id)
     {
         $room = RoomModel::findOrFail($id);
-        $types = TypeModel::all(); 
-        
+        $types = TypeModel::all();
+
         return view('admin_view.update_room', compact('room', 'types'));
     }
 
@@ -62,13 +67,13 @@ class RoomController extends Controller
         $request->validate([
             'room_number' => 'required|unique:rooms,room_number,' . $room->id,
             'type_id' => 'required|exists:types,id',
-            'status' => 'required'
+            'is_booked' => 'required|boolean'
         ]);
 
         $room->update([
             'room_number' => $request->room_number,
             'type_id' => $request->type_id,
-            'status' => $request->status,
+            'is_booked' => $request->is_booked,
         ]);
 
         return redirect()->route('rooms.index');

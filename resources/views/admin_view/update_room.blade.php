@@ -25,8 +25,7 @@
                                 <select name="type_id" class="form-select" required>
                                     <option value="" disabled>Select Type...</option>
                                     @foreach ($types as $type)
-                                        <option value="{{ $type->id }}"
-                                            {{ $room->type_id == $type->id ? 'selected' : '' }}>
+                                        <option value="{{ $type->id }}" {{ $room->type_id == $type->id ? 'selected' : '' }}>
                                             {{ $type->name }}
                                         </option>
                                     @endforeach
@@ -35,18 +34,18 @@
 
                             <div class="mb-3">
                                 <label class="fw-bold">Status</label>
-                                <select name="status" class="form-select" required>
-                                    <option value="Available" {{ $room->status == 'Available' ? 'selected' : '' }}>Available
+                                <select name="is_booked" class="form-select" required>
+                                    <option value="0" {{ $room->is_booked == 0 ? 'selected' : '' }}>
+                                        Available (Open for Booking)
                                     </option>
-                                    <option value="Occupied" {{ $room->status == 'Occupied' ? 'selected' : '' }}>Occupied
+                                    <option value="1" {{ $room->is_booked == 1 ? 'selected' : '' }}>
+                                        Maintenance (Close Room)
                                     </option>
-                                    <option value="Maintenance" {{ $room->status == 'Maintenance' ? 'selected' : '' }}>
-                                        Maintenance</option>
                                 </select>
                             </div>
 
                             <div class="d-flex justify-content-between mt-4">
-                                <a href="{{ route('rooms.index') }}" class="btn btn-secondary">&laquo; Back</a>
+                                <a href="{{ route('rooms.index') }}" class="btn btn-secondary">Back</a>
                                 <button class="btn btn-primary">Update Room</button>
                             </div>
                         </form>

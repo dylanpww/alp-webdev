@@ -36,4 +36,9 @@ class ReservationModel extends Model
     {
         return $this->belongsTo(RentMotorcycleModel::class, 'rental_id', 'id');
     }
+
+    public function payment()
+    {
+        return $this->hasOne(PaymentModel::class, 'reservation_id');
+    }
 }

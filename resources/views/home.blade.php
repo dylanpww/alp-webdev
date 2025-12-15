@@ -35,7 +35,8 @@
                     Located on Jl. Raya Semat, we are your quiet sanctuary close to the best cafes
                     and entertainment Canggu has to offer.
                 </p>
-                <a href="{{ route('types.book') }}" class="btn btn-primary btn-lg mt-3" style="background-color: #BA8B4E; border-color: #BA8B4E; ">Book Your Stay</a>
+                <a href="{{ route('types.book') }}" class="btn btn-primary btn-lg mt-3"
+                    style="background-color: #BA8B4E; border-color: #BA8B4E; ">Book Your Stay</a>
             </div>
         </div>
     </div>
@@ -113,4 +114,49 @@
         </div>
     </div>
 
+    <div class="container-fluid p-20 mb-5">
+        <div class="row g-0" style="min-height: 500px;">
+            <div class="col-lg-6" style="height: 500px;">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.3781132523764!2d115.1379455747759!3d-8.655541991391626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd2478371ab6291%3A0xaf7e15926151d465!2sSarang%20Comfort%20Stay!5e0!3m2!1sen!2sid!4v1765777790679!5m2!1sen!2sid"
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center justify-content-center bg-light text-dark"
+                style="min-height: 500px;">
+                <div class="p-5 text-center">
+                    <h6 class="fw-bold text-uppercase mb-3" style="letter-spacing: 3px;">Our Location</h6>
+                    <h2 class="fw-bold mb-4">Sarang Comfort Stay</h2>
+
+                    <p class="lead text-muted mb-4" style="font-family: serif; font-style: italic;">
+                        "A serene escape in the heart of Canggu."
+                    </p>
+
+                    <hr class="w-25 mx-auto border-dark opacity-25 mb-4">
+
+                    <div class="mb-3">
+
+                        <p class="mb-0 fw-bold">Address:</p>
+                        <p class="text-muted">
+                            Jl. Raya Semat, Tibubeneng<br>
+                            Kec. Kuta Utara, Kabupaten Badung<br>
+                            Bali 80361, Indonesia
+                        </p>
+                    </div>
+
+                    <div class="mb-3">
+                        <p class="mb-0 fw-bold">Email:</p>
+                        <p class="text-muted">sarangcomfortstay@gmail.com</p>
+                    </div>
+
+                    <div>
+                        <p class="mb-0 fw-bold">Phone:</p>
+                        <p class="text-muted">+62 812 3456 7890</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 @endsection

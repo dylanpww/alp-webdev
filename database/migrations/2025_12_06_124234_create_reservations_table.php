@@ -24,11 +24,8 @@ return new class extends Migration
                 ->constrained('rooms')
                 ->cascadeOnDelete();
 
-            $table->foreignId('rent_motorcycle_id')
-                ->nullable()
-                ->constrained('rent_motorcycles')
-                ->cascadeOnDelete();
-
+            $table->unsignedBigInteger('rental_id')
+                ->nullable();
             $table->timestamps();
         });
     }

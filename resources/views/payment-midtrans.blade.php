@@ -4,7 +4,7 @@
 @section('konten')
 <div class="container py-5 text-center">
     <div class="card shadow mx-auto p-5" style="max-width: 500px;">
-        <h2 class="text-success mb-3">Booking Created!</h2>
+        <h2 class="mb-3">Booking Created!</h2>
         <p>Your Order ID: {{ $reservation->id }}</p>
         <h3 class="fw-bold">Rp {{ number_format($reservation->total_price) }}</h3>
         
