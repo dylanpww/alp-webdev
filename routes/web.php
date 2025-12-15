@@ -59,10 +59,7 @@ Route::get('/dashboard', function () {return view('dashboard');});
     Route::get('/admin_view/facility/{id}/edit', [FacilityController::class, 'edit'])->name('facility.edit');
     Route::patch('/admin_view/facility/{id}', [FacilityController::class, 'update'])->name('facility.update');
     Route::delete('/admin_view/facility/{id}', [FacilityController::class, 'destroy'])->name('facility.destroy');
-
-    Route::resource('rooms', RoomController::class);
-    Route::post('/ratings/{id}/reviews', [RatingController::class, 'store'])->name('ratings.store');
-
+    
     Route::get('/admin_view/users', [ProfileController::class, 'usersIndex'])->name('users.index');
     Route::get('/admin/users/{id}/edit', [ProfileController::class, 'usersEdit'])->name('users.edit');
     Route::patch('/admin/users/{id}', [ProfileController::class, 'usersUpdate'])->name('users.update');
@@ -73,6 +70,7 @@ Route::middleware('role:manager,receptionist')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::post('/ratings/{id}/reviews', [RatingController::class, 'store'])->name('ratings.store');
     Route::get('/search-rooms', [AvailableRoomController::class, 'search'])->name('rooms.search');
     Route::get('/search-rentals', [RentMotorcycle::class, 'search'])->name('rents.search');
     Route::post('/rent-details/{id}/review', [RentMotorcycle::class, 'storeReview'])->name('rents.review.store');

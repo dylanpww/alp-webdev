@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\ReservationModel;
 use App\Models\TypeModel;
 use App\Models\TypeImagesModel;
 use Illuminate\Http\Request;
@@ -60,20 +62,43 @@ class TypeController extends Controller
     public function show($id)
     {
         $type = TypeModel::with(['reviews.user', 'images'])->findOrFail($id);
+        $canReview = false;
+        $alreadyReviewed = false;
         $averageRating = $type->reviews->avg('rating') ?? 0;
 
-        $roomData = (object) [
+        if (Auth::check()) {
+            $hasStayed = ReservationModel::where('user_id', Auth::id())
+                ->where(function ($q) {
+                    $q->where('status', 'Paid')
+                        ->orWhere('status', 'paid')
+                        ->orWhere('status', 'settlement')
+                        ->orWhere('status', 'capture');
+                })
+                ->whereHas('room', function ($query) use ($id) {
+                    $query->where('type_id', $id);
+                })
+                ->exists();
+
+            $alreadyReviewed = $type->reviews()->where('user_id', Auth::id())->exists();
+
+            if ($hasStayed && !$alreadyReviewed) {
+                $canReview = true;
+            }
+        }
+            $roomData = (object) [
             'id' => $type->id,
             'type_name' => $type->name,
             'price' => $type->price_per_night,
             'image' => $type->images->first() ? $type->images->first()->url : 'default.jpg',
             'description' => $type->description,
             'average_rating' => $averageRating,
-            'reviews' => $type->reviews 
+            'reviews' => $type->reviews
         ];
 
         return view('room-details', [
-            'room' => $roomData
+            'room' => $roomData,
+            'canReview' => $canReview,
+            'alreadyReviewed' => $alreadyReviewed
         ]);
     }
     public function edit($id)
@@ -106,7 +131,7 @@ class TypeController extends Controller
 
             foreach ($request->file('images') as $img) {
                 $path = $img->store($folderName, 'public');
-                
+
                 TypeImagesModel::create([
                     'type_id' => $type->id,
                     'url' => $path
