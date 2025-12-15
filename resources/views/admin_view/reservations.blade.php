@@ -32,6 +32,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Type</th>
+                                    <th>Payment Method</th>
                                     <th>Item Details</th>
                                     <th>Dates</th>
                                     <th>Status</th>
@@ -62,6 +63,9 @@
                                             @else
                                                 <span class="badge bg-warning text-dark">Rental</span>
                                             @endif
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-secondary">{{ $res->payment?->payment_method ?? '-'}}</span>
                                         </td>
                                         <td>
                                             @if ($res->type == 'Hotel' && $res->room)
