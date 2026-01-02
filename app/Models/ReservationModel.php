@@ -16,9 +16,12 @@ class ReservationModel extends Model
         "check_in_date",
         "check_out_date",
         "total_price",
+        "extra_bed",
         "status",
+        "notes",
         "type",
         "user_id",
+        "type_id",
         "room_id",
         "rental_id"
     ];
@@ -40,5 +43,10 @@ class ReservationModel extends Model
     public function payment()
     {
         return $this->hasOne(PaymentModel::class, 'reservation_id');
+    }
+
+    public function roomType()
+    {
+        return $this->belongsTo(TypeModel::class, 'type_id');
     }
 }

@@ -26,9 +26,7 @@
                             <p><strong>Rp {{ number_format($rent->price_per_day, 0, ',', '.') }}</strong> / day</p>
 
                             <div class="mt-auto">
-                                {{-- FORM KE RESERVATION (PAYMENT) --}}
                                 <form action="{{ route('reservations.createRental') }}" method="GET">
-                                    {{-- Menggunakan nama 'rental_id' sesuai validasi controller --}}
                                     <input type="hidden" name="rental_id" value="{{ $rent->id }}">
                                     <input type="hidden" name="start_date" value="{{ $start }}">
                                     <input type="hidden" name="end_date" value="{{ $end }}">

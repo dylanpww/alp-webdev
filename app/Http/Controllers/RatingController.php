@@ -14,7 +14,7 @@ class RatingController extends Controller
 
     public function store(Request $request, $id)
     {
-        
+
         $request->validate([
             'rating' => 'required|integer|min:1|max:5',
             'comment' => 'required|string|max:1000',
@@ -23,7 +23,6 @@ class RatingController extends Controller
         $hasStayed = ReservationModel::where('user_id', Auth::id())
             ->where(function ($q) {
                 $q->where('status', 'Paid')
-                    ->orWhere('status', 'paid')
                     ->orWhere('status', 'settlement')
                     ->orWhere('status', 'capture');
             })
@@ -43,7 +42,7 @@ class RatingController extends Controller
         if ($alreadyReviewed) {
             return back()->with('error', 'You have already reviewed this room.');
         }
-        
+
         RatingModel::create([
             'user_id' => Auth::id(),
             'type_id' => $id,

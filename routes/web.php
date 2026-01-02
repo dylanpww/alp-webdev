@@ -28,10 +28,13 @@ Route::get('/room-details', [RatingController::class, 'index'])->name('ratings.i
 Route::get('/rent-motorcycle', [RentMotorcycle::class, 'rent'])->name('rents.rent');
 Route::get('/rent-details/{id}', [RentMotorcycle::class, 'show'])->name('rents.show');
 Route::get('/room-details/{id}', [TypeController::class, 'show'])->name('types.show');
+Route::get('/search-rooms', [AvailableRoomController::class, 'search'])->name('rooms.search');
 
 
 Route::middleware('manager')->group(function () {
-Route::get('/dashboard', function () {return view('dashboard');});
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
     Route::get('/admin_view/room', [RoomController::class, 'index'])->name('rooms.index');
     Route::get('/admin_view/room/create', [RoomController::class, 'create'])->name('rooms.create');
     Route::post('/admin_view/room', [RoomController::class, 'store'])->name('rooms.store');
@@ -59,7 +62,7 @@ Route::get('/dashboard', function () {return view('dashboard');});
     Route::get('/admin_view/facility/{id}/edit', [FacilityController::class, 'edit'])->name('facility.edit');
     Route::patch('/admin_view/facility/{id}', [FacilityController::class, 'update'])->name('facility.update');
     Route::delete('/admin_view/facility/{id}', [FacilityController::class, 'destroy'])->name('facility.destroy');
-    
+
     Route::get('/admin_view/users', [ProfileController::class, 'usersIndex'])->name('users.index');
     Route::get('/admin/users/{id}/edit', [ProfileController::class, 'usersEdit'])->name('users.edit');
     Route::patch('/admin/users/{id}', [ProfileController::class, 'usersUpdate'])->name('users.update');
@@ -67,11 +70,12 @@ Route::get('/dashboard', function () {return view('dashboard');});
 
 Route::middleware('role:manager,receptionist')->group(function () {
     Route::get('/admin_view/reservations', [ReservationController::class, 'showAll'])->name('reservations.index');
+    Route::get('/reservations/{id}/assign', [ReservationController::class, 'assignRoom'])->name('reservations.assign');
+    Route::put('/reservations/{id}/assign', [ReservationController::class, 'storeAssignRoom'])->name('reservations.storeAssign');
 });
 
 Route::middleware('auth')->group(function () {
     Route::post('/ratings/{id}/reviews', [RatingController::class, 'store'])->name('ratings.store');
-    Route::get('/search-rooms', [AvailableRoomController::class, 'search'])->name('rooms.search');
     Route::get('/search-rentals', [RentMotorcycle::class, 'search'])->name('rents.search');
     Route::post('/rent-details/{id}/review', [RentMotorcycle::class, 'storeReview'])->name('rents.review.store');
     Route::get('/room-reservation', [ReservationController::class, 'createRoom'])->name('reservations.createRoom');

@@ -9,10 +9,6 @@
         </div>
         
         <div class="card-body">
-            @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
-
             <div class="row mb-3">
                 <div class="col-md-6">
                     <form action="{{ route('users.index') }}" method="GET">
@@ -20,7 +16,7 @@
                             <input type="text" name="search" class="form-control" 
                                 placeholder="Search by name or email..." 
                                 value="{{ request('search') }}">
-                            <button class="btn btn-primary" type="submit">Search</button>
+                            <button class="btn text-white" style="background-color: #BA8B4E; border-color: #BA8B4E;" type="submit">Search</button>
                         </div>
                     </form>
                 </div>
@@ -45,7 +41,6 @@
                             <td class="fw-bold">{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
-                                {{-- Badge warna-warni sesuai role --}}
                                 @if($user->role == 'manager')
                                     <span class="badge bg-danger">Manager</span>
                                 @elseif($user->role == 'receptionist')
@@ -56,7 +51,7 @@
                             </td>
                             <td>{{ $user->created_at->format('d M Y') }}</td>
                             <td>
-                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-primary">
+                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm text-white" style="background-color: #BA8B4E; border-color: #BA8B4E;">
                                     Change Role
                                 </a>
                             </td>

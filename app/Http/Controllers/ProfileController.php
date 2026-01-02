@@ -68,10 +68,7 @@ class ProfileController extends Controller
 
     public function usersIndex(Request $request): View
     {
-        // Ambil semua user urut dari terbaru
         $users = User::latest();
-
-        // Jika ada input search dari user
         if ($request->has('search') && $request->search != '') {
             $search = $request->search;
             $users->where(function ($q) use ($search) {

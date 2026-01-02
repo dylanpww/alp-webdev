@@ -14,14 +14,23 @@ return new class extends Migration
             $table->date('check_in_date');
             $table->date('check_out_date');
             $table->integer('total_price');
+            $table->boolean('extra_bed')->default(false);
+
             $table->string('status')->default('pending');
             $table->string('type');
+
+            $table->string('notes')->nullable();
 
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
 
             $table->foreignId('room_id')
                 ->nullable()
                 ->constrained('rooms')
+                ->cascadeOnDelete();
+
+            $table->foreignId('type_id')
+                ->nullable()
+                ->constrained('types')
                 ->cascadeOnDelete();
 
             $table->unsignedBigInteger('rental_id')

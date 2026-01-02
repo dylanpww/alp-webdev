@@ -4,13 +4,13 @@
 @section('konten')
     <div class="container py-5">
         <div class="card shadow mb-5 border-0">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header text-white" style="background-color: #BA8B4E; border-color: #BA8B4E;">
                 <h5 class="mb-0 fw-bold">Room List</h5>
             </div>
 
             <div class="card-body">
                 <div class="mb-3 text-end">
-                    <a href="{{ route('rooms.create') }}" class="btn btn-success">
+                    <a href="{{ route('rooms.create') }}" class="btn text-white" style="background-color: #BA8B4E; border-color: #BA8B4E;">
                         + Add New Room
                     </a>
                 </div>
