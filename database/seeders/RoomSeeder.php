@@ -23,22 +23,22 @@ class RoomSeeder extends Seeder
             ]);
         }
 
-        // for ($i = 201; $i <= 208; $i++) {
-        //     RoomModel::create([
-        //         'room_number' => (string) $i,
-        //         'is_booked' => false,
-        //         'capacity' => 3,
-        //         'type_id' => 2,
-        //     ]);
-        // }
+        for ($i = 201; $i <= 208; $i++) {
+            RoomModel::create([
+                'room_number' => (string) $i,
+                'is_booked' => false,
+                'capacity' => 2,
+                'type_id' => 2,
+            ]);
+        }
 
-        // for ($i = 301; $i <= 308; $i++) {
-        //     RoomModel::create([
-        //         'room_number' => (string) $i,
-        //         'is_booked' => false,
-        //         'capacity' => 2,
-        //         'type_id' => 3,
-        //     ]);
-        // }
+        for ($i = 301; $i <= 308; $i++) {
+            RoomModel::create([
+                'room_number' => (string) $i,
+                'is_booked' => false,
+                'capacity' => 2,
+                'type_id' => 3,
+            ]);
+        }
     }
 }
